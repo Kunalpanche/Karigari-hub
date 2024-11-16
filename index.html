@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KarigariHub - Discover Unique Handcrafted Treasures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #f4ede4;
+            --secondary-color: #e6d5c3;
+            --accent-color: #4a9d8f;
+            --text-color: #333;
+            --light-text-color: #666;
+            --dark-bg-color: #1a1a1a;
+            --dark-text-color: #f4f4f4;
+        }
+
+        .dark-mode {
+            --primary-color: #1a1a1a;
+            --secondary-color: #2c2c2c;
+            --text-color: #f4f4f4;
+            --light-text-color: #ccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--primary-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Splash Screen */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        #splash-screen.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #splash-screen h1 {
+            font-size: 3rem;
+            color: var(--accent-color);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Header and Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode header {
+            background-color: var(--dark-bg-color);
+        }
+
+        #navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .cart-icon, .profile-icon, .hamburger, #dark-mode-toggle {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .hamburger {
+            display: none;
+        }
+
+        /* Hero Section */
+        #hero {
+            background-image: url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+            position: relative;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        #hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        #hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 0.7s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 0.9s;
+        }
+
+        .cta-button {
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:first-child {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .cta-button.secondary {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Featured Products Section */
+        #featured-products {
+            padding: 4rem 5%;
+        }
+
+        #featured-products h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .dark-mode .product-card {
+            background-color: var(--secondary-color);
+        }
+
+        .product-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1rem;
+        }
+
+        .product-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            padding: 3rem 5% 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        #newsletter-form {
+            display: flex;
+        }
+
+        #newsletter-form input {
+            flex-grow: 1;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 5px 0 0 5px;
+        }
+
+        #newsletter-form button {
+            padding: 0.5rem 1rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--light-text-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            #hero h1 {
+                font-size: 2rem;
+            }
+
+            #hero p {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Updated nav-icons styles */
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-icons > * {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+        }
+
+        /* Chatbot styles */
+        #chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        #chat-button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        #chat-button:hover {
+            transform: scale(1.1);
+        }
+
+        #chatbot-iframe {
+            display: none;
+            width: 350px;
+            height: 500px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <div id="splash-screen">
+        <h1>KarigariHub</h1>
+    </div>
+
+    <header>
+        <nav id="navbar">
+            <div class="logo">KarigariHub</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="product.html">Products</a></li>
+                <li><a href="artisan.html">Artisans</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="tracking.html">Tracking</a></li>
+            </ul>
+            <div class="nav-icons">
+                <span class="cart-icon"><i class="fas fa-shopping-cart"></i></span>
+                <span class="profile-icon" id="profileButton"><i class="fas fa-user"></i></span>
+                <span id="dark-mode-toggle"><i class="fas fa-moon"></i></span>
+            </div>
+            <div class="hamburger">☰</div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h1>Discover Unique Handcrafted Treasures</h1>
+            <p>Support local artisans and bring their creations into your home</p>
+            <div class="cta-buttons">
+                <a href="product.html" class="cta-button">Shop Now</a>
+                <a href="artisan.html" class="cta-button secondary">Meet Artisans</a>
+            </div>
+        </section>
+
+        <section id="featured-products">
+            <h2>Featured Products</h2>
+            <div class="product-grid">
+                <!-- Product cards will be dynamically inserted here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Connecting local artisans with art lovers worldwide.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="product.html">Products</a></li>
+                    <li><a href="artisan.html">Artisans</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 KarigariHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container">
+        <button id="chat-button" onclick="toggleChatbot()">
+            <i class="fas fa-comment"></i>
+        </button>
+        <iframe id="chatbot-iframe" src="https://www.chatbase.co/chatbot-iframe/JxSZRe4f0TIRNtzpypydu" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        // Splash screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('splash-screen').classList.add('hide');
+            }, 2000);
+        });
+
+        // Sample product data
+        const products = [
+            { id: 1, name: "Handcrafted Pottery Vase", price: 79.99, image: "https://images.unsplash.com/photo-1610701596007-11502861dcfa" },
+            { id: 2, name: "Embroidered Wall Hanging", price: 129.99, image: "https://m.media-amazon.com/images/I/71FCMxq4PSL.jpg" },
+            { id: 3, name: "Wooden Carved Elephant", price: 89.99, image:  "https://sahyadale.com/cdn/shop/products/61GvZhieFTL._SL1200_360x.jpg?v=1631522381" },
+            { id: 4, name: "Hand-painted Silk Scarf", price: 59.99, image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ6hMV_G90F05gdq5v9iKbFRvAHBF-AlcZNcK7sb_8WB4aDPWr9Ts1Too_eTjlv5XPJPWJ0I-TUsQ89Ev4Y9WreNlt68U0B-SE_Cnyoiiw" }
+        ];
+
+        // Function to create product cards
+        function createProductCard(product) {
+            return `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-price">$${product.price.toFixed(2)}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Populate featured products
+        const productGrid = document.querySelector('.product-grid');
+        products.forEach(product => {
+            productGrid.innerHTML += createProductCard(product);
+        });
+
+        // Animate product cards on scroll
+        const productCards = document.querySelectorAll('.product-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        productCards.forEach(card => {
+            observer.observe(card);
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const icon = darkModeToggle.querySelector('i');
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // Profile button click handler
+        const profileButton = document.getElementById('profileButton');
+        profileButton.addEventListener('click', () => {
+            window.location.href = 'profile.html';
+        });
+
+        // Newsletter form submission
+        const newsletterForm = document.getElementById('newsletter-form');
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for subscribing to our newsletter!');
+            newsletterForm.reset();
+        });
+
+        // Chatbot toggle function
+        function toggleChatbot() {
+            const iframe = document.getElementById('chatbot-iframe');
+            const button = document.getElementById('chat-button');
+            if (iframe.style.display === 'none') {
+                iframe.style.display = 'block';
+                button.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                iframe.style.display = 'none';
+                button.innerHTML = '<i class="fas fa-comment"></i>';
+            }
+        }
+
+        // Chatbot configuration
+        window.embeddedChatbotConfig = {
+            chatbotId: "JxSZRe4f0TIRNtzpypydu",
+            domain: "www.chatbase.co"
+        }
+    </script>
+
+    <!-- Chatbot embed script -->
+    <script src="https://www.chatbase.co/embed.min.js" chatbotId="JxSZRe4f0TIRNtzpypydu" domain="www.chatbase.co" defer></script>
+</body>
+</html>

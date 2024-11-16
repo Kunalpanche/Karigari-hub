@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Artisans - KarigariHub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #f4ede4;
+            --secondary-color: #e6d5c3;
+            --accent-color: #4a9d8f;
+            --text-color: #333;
+            --light-text-color: #666;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+        }
+        .artisan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .artisan-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .artisan-card:hover {
+            transform: translateY(-5px);
+        }
+        .artisan-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .artisan-card-info {
+            padding: 1rem;
+        }
+        .artisan-card-name {
+            margin: 0 0 0.5rem 0;
+            color: var(--accent-color);
+        }
+        .artisan-card-specialty {
+            color: var(--light-text-color);
+            margin-bottom: 0.5rem;
+        }
+        .view-profile {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .view-profile:hover {
+            background-color: #3a7c70;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links li {
+                margin: 0;
+                text-align: center;
+            }
+            .nav-links a {
+                display: block;
+                padding: 1rem;
+            }
+            .hamburger {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">KarigariHub</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="artisans.html">Artisans</a></li>
+                    <li><a href="#">Cart</a></li>
+                </ul>
+                <div class="hamburger">☰</div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <h1>Our Talented Artisans</h1>
+        <div class="artisan-grid">
+            <div class="artisan-card">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb" alt="Emma Woodcraft">
+                <div class="artisan-card-info">
+                    <h2 class="artisan-card-name">Emma Woodcraft</h2>
+                    <p class="artisan-card-specialty">Handcrafted Pottery</p>
+                    <a href="artisan-profile1.html" class="view-profile">View Profile</a>
+                </div>
+            </div>
+            <div class="artisan-card">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d" alt="John Smithson">
+                <div class="artisan-card-info">
+                    <h2 class="artisan-card-name">John Smithson</h2>
+                    <p class="artisan-card-specialty">Woodworking</p>
+                    <a href="artisan-profile2.html" class="view-profile">View Profile</a>
+                </div>
+            </div>
+            <div class="artisan-card">
+                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956" alt="Sarah Glassmaker">
+                <div class="artisan-card-info">
+                    <h2 class="artisan-card-name">Sarah Glassmaker</h2>
+                    <p class="artisan-card-specialty">Stained Glass Art</p>
+                    <a href="artisan-profile3.html" class="view-profile">View Profile</a>
+                </div>
+            </div>
+            <div class="artisan-card">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Michael Weaver">
+                <div class="artisan-card-info">
+                    <h2 class="artisan-card-name">Michael Weaver</h2>
+                    <p class="artisan-card-specialty">Textile Arts</p>
+                    <a href="artisan-profile4.html" class="view-profile">View Profile</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const artisanCards = document.querySelectorAll('.artisan-card');
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            artisanCards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('view-profile')) {
+                        const profileLink = card.querySelector('.view-profile');
+                        profileLink.click();
+                    }
+                });
+            });
+
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

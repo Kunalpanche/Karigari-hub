@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KarigariHub - Order Tracking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #f4ede4;
+            --secondary-color: #e6d5c3;
+            --accent-color: #4a9d8f;
+            --text-color: #333;
+            --light-text-color: #666;
+            --dark-bg-color: #1a1a1a;
+            --dark-text-color: #f4f4f4;
+        }
+
+        .dark-mode {
+            --primary-color: #1a1a1a;
+            --secondary-color: #2c2c2c;
+            --text-color: #f4f4f4;
+            --light-text-color: #ccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--primary-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode header {
+            background-color: var(--dark-bg-color);
+        }
+
+        #navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .cart-icon, .profile-icon, .hamburger, #dark-mode-toggle {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .hamburger {
+            display: none;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .tracking-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .tracking-container {
+            background-color: var(--secondary-color);
+        }
+
+        .tracking-info {
+            margin-bottom: 2rem;
+        }
+
+        .tracking-progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .tracking-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-icon.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .step-line {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background-color: var(--secondary-color);
+            z-index: 0;
+        }
+
+        .step-line.active {
+            background-color: var(--accent-color);
+        }
+
+        .tracking-step:last-child .step-line {
+            display: none;
+        }
+
+        .map-container {
+            height: 300px;
+            margin-bottom: 2rem;
+        }
+
+        .order-details {
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .dark-mode .order-details {
+            background-color: var(--dark-bg-color);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-icons > * {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav id="navbar">
+            <div class="logo">KarigariHub</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="product.html">Products</a></li>
+                <li><a href="artisan.html">Artisans</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+            <div class="nav-icons">
+                <span class="cart-icon"><i class="fas fa-shopping-cart"></i></span>
+                <span class="profile-icon" id="profileButton"><i class="fas fa-user"></i></span>
+                <span id="dark-mode-toggle"><i class="fas fa-moon"></i></span>
+            </div>
+            <div class="hamburger">☰</div>
+        </nav>
+    </header>
+    <main>
+        <div class="tracking-container">
+            <div class="tracking-info">
+                <h2>Order Tracking</h2>
+                <p>Order ID: #12345</p>
+                <p>Estimated Delivery: June 15, 2023</p>
+            </div>
+            <div class="tracking-progress">
+                <div class="tracking-step">
+                    <div class="step-icon active"><i class="fas fa-box"></i></div>
+                    <div class="step-line active"></div>
+                    <p>Order Placed</p>
+                </div>
+                <div class="tracking-step">
+                    <div class="step-icon"><i class="fas fa-warehouse"></i></div>
+                    <div class="step-line"></div>
+                    <p>Processing</p>
+                </div>
+                <div class="tracking-step">
+                    <div class="step-icon"><i class="fas fa-truck"></i></div>
+                    <div class="step-line"></div>
+                    <p>In Transit</p>
+                </div>
+                <div class="tracking-step">
+                    <div class="step-icon"><i class="fas fa-home"></i></div>
+                    <p>Delivered</p>
+                </div>
+            </div>
+        </div>
+        <div class="map-container">
+            <iframe
+                width="100%"
+                height="100%"
+                frameborder="0"
+                style="border:0"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2167934017566!2d-73.98784368459377!3d40.74844097932847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1623761234567!5m2!1sen!2sus"
+                allowfullscreen=""
+                loading="lazy"
+            ></iframe>
+        </div>
+        <div class="order-details">
+            <h3>Order Details</h3>
+            <p>Product: Handcrafted Pottery Vase</p>
+            <p>Quantity: 1</p>
+            <p>Price: $79.99</p>
+            <p>Shipping Address: 123 Main St, New York, NY 10001</p>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const body = document.body;
+
+            // Dark mode toggle
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                const icon = darkModeToggle.querySelector('i');
+                if (body.classList.contains('dark-mode')) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            });
+
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            hamburger.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
+
+            // Simulated real-time tracking update
+            const steps = document.querySelectorAll('.tracking-step');
+            let currentStep = 0;
+
+            function updateTracking() {
+                if (currentStep < steps.length - 1) {
+                    currentStep++;
+                    steps[currentStep].querySelector('.step-icon').classList.add('active');
+                    steps[currentStep].querySelector('.step-line').classList.add('active');
+                }
+            }
+
+            // Update tracking every 5 seconds (for demonstration purposes)
+            setInterval(updateTracking, 5000);
+        });
+    </script>
+</body>
+</html>

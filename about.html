@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About KarigariHub - Connecting Artisans and Art Lovers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #f4ede4;
+            --secondary-color: #e6d5c3;
+            --accent-color: #4a9d8f;
+            --text-color: #333;
+            --light-text-color: #666;
+            --dark-bg-color: #1a1a1a;
+            --dark-text-color: #f4f4f4;
+        }
+
+        .dark-mode {
+            --primary-color: #1a1a1a;
+            --secondary-color: #2c2c2c;
+            --text-color: #f4f4f4;
+            --light-text-color: #ccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--primary-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode header {
+            background-color: var(--dark-bg-color);
+        }
+
+        #navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .cart-icon, .profile-icon, .hamburger, #dark-mode-toggle {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .hamburger {
+            display: none;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .about-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .about-section {
+            background-color: var(--secondary-color);
+        }
+
+        .about-section h2 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .about-section p {
+            margin-bottom: 1rem;
+        }
+
+        .team-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .dark-mode .team-member {
+            background-color: var(--dark-bg-color);
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            padding: 2rem 5%;
+            margin-top: 2rem;
+        }
+
+        .dark-mode footer {
+            background-color: var(--dark-bg-color);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-icons > * {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav id="navbar">
+            <div class="logo">KarigariHub</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="artisan.html">Artisans</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="tracking.html">Tracking</a></li>
+            </ul>
+            <div class="nav-icons">
+                <span class="cart-icon"><i class="fas fa-shopping-cart"></i></span>
+                <span class="profile-icon" id="profileButton"><i class="fas fa-user"></i></span>
+                <span id="dark-mode-toggle"><i class="fas fa-moon"></i></span>
+            </div>
+            <div class="hamburger">☰</div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="about-section">
+            <h2>About KarigariHub</h2>
+            <p>KarigariHub is a unique online marketplace that connects talented artisans with art enthusiasts from around the world. Our mission is to preserve and promote traditional craftsmanship while providing artisans with a global platform to showcase and sell their handcrafted creations.</p>
+            <p>Founded in 2020, KarigariHub has grown into a thriving community of over 1,000 artisans from various cultural backgrounds, offering a wide range of handmade products including pottery, textiles, jewelry, and home decor items.</p>
+        </section>
+
+        <section class="about-section">
+            <h2>Our Vision</h2>
+            <p>At KarigariHub, we envision a world where traditional craftsmanship is valued and celebrated. We strive to create a sustainable ecosystem that empowers artisans, preserves cultural heritage, and brings unique, high-quality handcrafted products to conscious consumers worldwide.</p>
+        </section>
+
+        <section class="about-section">
+            <h2>Our Team</h2>
+            <div class="team-section">
+                <div class="team-member">
+                    <img src="https://media.licdn.com/dms/image/v2/D4E03AQGsT-aSb1KyZQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1681141106717?e=1735171200&v=beta&t=3kX4r900u02vrRRsgsNqwYvj06XZgShfS2Uyes1JhyM" alt="Sarah Johnson">
+                    <h3>Piyush Chafle</h3>
+                    <p>Founder & CEO</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://media.licdn.com/dms/image/v2/D5603AQEJyfpR6m8H-Q/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1719978941823?e=1735171200&v=beta&t=aSsjRMEQSb7eVgxAbq3kqYUujyV-Wz8grFVjogggB7g" alt="Michael Chen">
+                    <h3>Rajat Mahamalla</h3>
+                    <p>Head of Operations</p>
+                </div>
+              
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="artisan.html">Artisans</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@karigarihub.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 KarigariHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const body = document.body;
+
+            // Dark mode toggle
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                const icon = darkModeToggle.querySelector('i');
+                if (body.classList.contains('dark-mode')) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            });
+
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            hamburger.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
+        });
+    </script>
+</body>
+</html>

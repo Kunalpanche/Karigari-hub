@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> <a href="index.html">Create Profile - KarigariHub</a></title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #f4ede4;
+            --secondary-color: #e6d5c3;
+            --accent-color: #4a9d8f;
+            --text-color: #333;
+            --light-text-color: #666;
+            --dark-bg-color: #1a1a1a;
+            --dark-text-color: #f4f4f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .artisan-header {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .artisan-image-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .artisan-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-color);
+        }
+
+        .edit-photo {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .artisan-info {
+            flex-grow: 1;
+        }
+
+        .artisan-info h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .artisan-specialty {
+            color: var(--light-text-color);
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--text-color);
+        }
+
+        .artisan-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        .artisan-bio {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .artisan-products {
+            margin-top: 2rem;
+        }
+
+        .artisan-products h2 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-card-info {
+            padding: 1rem;
+        }
+
+        .product-card-title {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .product-card-price {
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 50%;
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .artisan-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .artisan-actions {
+                flex-direction: column;
+            }
+
+            .modal-content {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">KarigariHub</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="artisan.html">Artisans</a></li>
+                    <li><a href="#">Cart</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="artisan-header">
+            <div class="artisan-image-container">
+                <img src="https://cdn-icons-png.flaticon.com/128/456/456212.png" alt="Artisan" class="artisan-image" id="artisanImage">
+                <button class="edit-photo" id="editPhotoBtn">📷</button>
+            </div>
+            <div class="artisan-info">
+                <h1>Create your @username</h1>
+                <p class="artisan-specialty"></p>
+                <div class="social-links" id="socialLinks">
+                    <!-- Social media links will be dynamically added here -->
+                </div>
+                <div class="artisan-actions">
+                    <button class="btn btn-primary" id="editProfileBtn">Edit Profile</button>
+                    <button class="btn btn-secondary" id="dashboardBtn">Analytics Dashboard</button>
+                    <button class="btn btn-primary" id="uploadProductBtn">Upload Product</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="artisan-bio">
+            <h2>About Me</h2>
+            <p id="artisanBio"></p>
+        </section>
+
+        <section class="artisan-products">
+            <h2>Explore Products</h2>
+            <div class="product-grid" id="productGrid">
+                <!-- Product cards will be dynamically added here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Edit Profile</h2>
+            <form id="editProfileForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="specialty">Specialty:</label>
+                <input type="text" id="specialty" name="specialty" required>
+                <label for="bio">Bio:</label>
+                <textarea id="bio" name="bio" rows="4" required></textarea>
+                <label for="facebook">Facebook:</label>
+                <input type="url" id="facebook" name="facebook">
+                <label for="instagram">Instagram:</label>
+                <input type="url" id="instagram" name="instagram">
+                <label for="twitter">Twitter:</label>
+                <input type="url" id="twitter" name="twitter">
+                <label for="youtube">YouTube:</label>
+                <input type="url" id="youtube" name="youtube">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Upload Product Modal -->
+    <div id="uploadProductModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Upload New Product</h2>
+            <form id="uploadProductForm">
+                <label for="productName">Product Name:</label>
+                <input type="text" id="productName" name="productName" required>
+                <label for="productPrice">Price:</label>
+                <input type="number" id="productPrice" name="productPrice" min="0" step="0.01" required>
+                <label for="productDescription">Description:</label>
+                <textarea id="productDescription" name="productDescription" rows="4" required></textarea>
+                <label for="productImage">Product Image:</label>
+                <input type="file" id="productImage" name="productImage" accept="image/*" required>
+                <button type="submit" class="btn btn-primary">Upload Product</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const editProfileBtn = document.getElementById('editProfileBtn');
+            const dashboardBtn = document.getElementById('dashboardBtn');
+            const uploadProductBtn = document.getElementById('uploadProductBtn');
+            const editPhotoBtn = document.getElementById('editPhotoBtn');
+            const editProfileModal = document.getElementById('editProfileModal');
+            const uploadProductModal = document.getElementById('uploadProductModal');
+            const closeBtns = document.getElementsByClassName('close');
+            const editProfileForm = document.getElementById('editProfileForm');
+            const uploadProductForm = document.getElementById('uploadProductForm');
+            const artisanBio = document.getElementById('artisanBio');
+            const productGrid = document.getElementById('productGrid');
+            const socialLinks = document.getElementById('socialLinks');
+
+            let socialMediaData = {
+                facebook: '',
+                instagram: '',
+                twitter: '',
+                youtube: ''
+            };
+
+            function updateSocialLinks() {
+                socialLinks.innerHTML = '';
+                for (let [platform, url] of Object.entries(socialMediaData)) {
+                    if (url) {
+                        socialLinks.innerHTML += `<a href="${url}" target="_blank" aria-label="${platform}"><i class="fab fa-${platform}"></i></a>`;
+                    }
+                }
+            }
+
+            editProfileBtn.onclick = () => {
+                editProfileModal.style.display = 'block';
+                document.getElementById('bio').value = artisanBio.textContent;
+                document.getElementById('facebook').value = socialMediaData.facebook || '';
+                document.getElementById('instagram').value = socialMediaData.instagram || '';
+                document.getElementById('twitter').value = socialMediaData.twitter || '';
+                document.getElementById('youtube').value = socialMediaData.youtube || '';
+            }
+
+            dashboardBtn.onclick = () => {
+                window.location.href = 'dashboard.html';
+            }
+
+            uploadProductBtn.onclick = () => {
+                uploadProductModal.style.display = 'block';
+            }
+
+            editPhotoBtn.onclick = () => {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.onchange = (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            document.getElementById('artisanImage').src = e.target.result;
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                }
+                input.click();
+            }
+
+            for (let closeBtn of closeBtns) {
+                closeBtn.onclick = function() {
+                    editProfileModal.style.display = 'none';
+                    uploadProductModal.style.display = 'none';
+                }
+            }
+
+            
+
+            editProfileForm.onsubmit = (e) => {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const specialty = document.getElementById('specialty').value;
+                const bio = document.getElementById('bio').value;
+                
+                document.querySelector('.artisan-info h1').textContent = name;
+                document.querySelector('.artisan-specialty').textContent = `Specialty: ${specialty}`;
+                artisanBio.textContent = bio;
+                
+                socialMediaData = {
+                    facebook: document.getElementById('facebook').value,
+                    instagram: document.getElementById('instagram').value,
+                    twitter: document.getElementById('twitter').value,
+                    youtube: document.getElementById('youtube').value
+                };
+                
+                updateSocialLinks();
+                
+                editProfileModal.style.display = 'none';
+            }
+
+            uploadProductForm.onsubmit = (e) => {
+                e.preventDefault();
+                const productName = document.getElementById('productName').value;
+                const productPrice = document.getElementById('productPrice').value;
+                const productDescription = document.getElementById('productDescription').value;
+                const productImage = document.getElementById('productImage').files[0];
+
+                const newProductCard = document.createElement('div');
+                newProductCard.className = 'product-card';
+                newProductCard.innerHTML = `
+                    <img src="${URL.createObjectURL(productImage)}" alt="${productName}">
+                    <div class="product-card-info">
+                        <h3 class="product-card-title">${productName}</h3>
+                        <p class="product-card-price">$${parseFloat(productPrice).toFixed(2)}</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-secondary">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+
+                productGrid.appendChild(newProductCard);
+
+                uploadProductForm.reset();
+                uploadProductModal.style.display = 'none';
+
+                const newBuyButton = newProductCard.querySelector('.btn-primary');
+                const newAddToCartButton = newProductCard.querySelector('.btn-secondary');
+
+                newBuyButton.addEventListener('click', () => {
+                    alert(`Proceeding to checkout for ${productName}`);
+                });
+
+                newAddToCartButton.addEventListener('click', () => {
+                    alert(`${productName} added to cart!`);
+                });
+            }
+
+            window.onclick = (event) => {
+                if (event.target == editProfileModal) {
+                    editProfileModal.style.display = 'none';
+                }
+                if (event.target == uploadProductModal) {
+                    uploadProductModal.style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

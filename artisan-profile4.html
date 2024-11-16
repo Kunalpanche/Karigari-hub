@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #f4ede4;
+            --secondary-color: #e6d5c3;
+            --accent-color: #4a9d8f;
+            --text-color: #333;
+            --light-text-color: #666;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        header {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .artisan-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .artisan-image-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin-right: 2rem;
+        }
+        .artisan-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-color);
+        }
+        .edit-photo {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .artisan-info {
+            flex-grow: 1;
+        }
+        .artisan-info h1 {
+            margin: 0 0 0.5rem 0;
+            color: var(--accent-color);
+        }
+        .artisan-specialty {
+            color: var(--light-text-color);
+            font-size: 1.1rem;
+        }
+        .social-links {
+            margin-top: 1rem;
+        }
+        .social-links a {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .social-links a:hover {
+            color: var(--text-color);
+        }
+        .artisan-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .artisan-bio {
+            margin-bottom: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .artisan-products h2 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .product-card-info {
+            padding: 1rem;
+        }
+        .product-card-title {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+        .product-card-price {
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #3a8d7f;
+        }
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+        .btn-secondary:hover {
+            background-color: #d6c5b3;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .artisan-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .artisan-image-container {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            .artisan-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="artisan.html">Artisans</a></li>
+                <li><a href="#">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="artisan-header">
+            <div class="artisan-image-container">
+                <img src="https://cdn-icons-png.flaticon.com/128/456/456212.png" alt="Emma Woodcraft" class="artisan-image" id="artisanImage">
+                <button class="edit-photo" id="editPhotoBtn">📷</button>
+            </div>
+            <div class="artisan-info">
+                <h1> create your @username</h1>
+                <p class="artisan-specialty"> </p>
+                <div class="social-links" id="socialLinks">
+                    <!-- Social media links will be dynamically added here -->
+                </div>
+                <div class="artisan-actions">
+                    <button class="btn btn-primary" id="editProfileBtn">Edit Profile</button>
+                    <button class="btn btn-secondary" id="dashboardBtn">Analytics Dashboard</button>
+                    <button class="btn btn-primary" id="uploadProductBtn">Upload Product</button>
+                </div>
+            </div>
+        </section>
+        <section class="artisan-bio">
+            <h2> </h2>
+            <p id="artisanBio"> </p>
+            <p> </p>
+        </section>
+        <section class="artisan-products">
+            <h2>Explore Products</h2>
+            <div class="product-grid" id="productGrid">
+                
+                    </div>
+                </div>
+               
+                    </div>
+                </div>
+              
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Edit Profile</h2>
+            <form id="editProfileForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="Emma Woodcraft" required><br><br>
+                <label for="specialty">Specialty:</label>
+                <input type="text" id="specialty" name="specialty" value="Handcrafted Pottery" required><br><br>
+                <label for="bio">Bio:</label>
+                <textarea id="bio" name="bio" rows="4" required></textarea><br><br>
+                <label for="facebook">Facebook:</label>
+                <input type="url" id="facebook" name="facebook"><br><br>
+                <label for="instagram">Instagram:</label>
+                <input type="url" id="instagram" name="instagram"><br><br>
+                <label for="twitter">Twitter:</label>
+                <input type="url" id="twitter" name="twitter"><br><br>
+                <label for="youtube">YouTube:</label>
+                <input type="url" id="youtube" name="youtube"><br><br>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Upload Product Modal -->
+    <div id="uploadProductModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Upload New Product</h2>
+            <form id="uploadProductForm">
+                <label for="productName">Product Name:</label>
+                <input type="text" id="productName" name="productName" required><br><br>
+                <label for="productPrice">Price:</label>
+                <input type="number" id="productPrice" name="productPrice" min="0" step="0.01" required><br><br>
+                <label for="productDescription">Description:</label>
+                <textarea id="productDescription" name="productDescription" rows="4" required></textarea><br><br>
+                <label for="productImage">Product Image:</label>
+                <input type="file" id="productImage" name="productImage" accept="image/*" required><br><br>
+                <button type="submit" class="btn btn-primary">Upload Product</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const editProfileBtn = document.getElementById('editProfileBtn');
+            const dashboardBtn = document.getElementById('dashboardBtn');
+            const uploadProductBtn = document.getElementById('uploadProductBtn');
+            const editPhotoBtn = document.getElementById('editPhotoBtn');
+            const editProfileModal = document.getElementById('editProfileModal');
+            const uploadProductModal = document.getElementById('uploadProductModal');
+            const closeBtns = document.getElementsByClassName('close');
+            const editProfileForm = document.getElementById('editProfileForm');
+            const uploadProductForm =   document.getElementById('uploadProductForm');
+            const artisanBio = document.getElementById('artisanBio');
+            const productGrid = document.getElementById('productGrid');
+            const socialLinks = document.getElementById('socialLinks');
+
+            // Initial social media data
+            let socialMediaData = {
+                facebook: 'https://facebook.com/emmawoodcraft',
+                instagram: 'https://instagram.com/emmawoodcraft',
+                twitter: 'https://twitter.com/emmawoodcraft',
+                youtube: 'https://youtube.com/emmawoodcraft'
+            };
+
+            // Function to update social media links
+            function updateSocialLinks() {
+                socialLinks.innerHTML = '';
+                for (let [platform, url] of Object.entries(socialMediaData)) {
+                    if (url) {
+                        socialLinks.innerHTML += `<a href="${url}" target="_blank" aria-label="${platform}"><i class="fab fa-${platform}"></i></a>`;
+                    }
+                }
+            }
+
+            // Initial update of social links
+            updateSocialLinks();
+
+            // Edit Profile
+            editProfileBtn.onclick = () => {
+                editProfileModal.style.display = 'block';
+                document.getElementById('bio').value = artisanBio.textContent;
+                document.getElementById('facebook').value = socialMediaData.facebook || '';
+                document.getElementById('instagram').value = socialMediaData.instagram || '';
+                document.getElementById('twitter').value = socialMediaData.twitter || '';
+                document.getElementById('youtube').value = socialMediaData.youtube || '';
+            }
+
+            // Analytics Dashboard
+            dashboardBtn.onclick = () => {
+                window.location.href = 'dashboard.html';
+            }
+
+            // Upload Product
+            uploadProductBtn.onclick = () => {
+                uploadProductModal.style.display = 'block';
+            }
+
+            // Edit Photo
+            editPhotoBtn.onclick = () => {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.onchange = (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            document.getElementById('artisanImage').src = e.target.result;
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                }
+                input.click();
+            }
+
+            // Close modals
+            for (let closeBtn of closeBtns) {
+                closeBtn.onclick = function() {
+                    editProfileModal.style.display = 'none';
+                    uploadProductModal.style.display = 'none';
+                }
+            }
+
+            // Submit edit profile form
+            editProfileForm.onsubmit = (e) => {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const specialty = document.getElementById('specialty').value;
+                const bio = document.getElementById('bio').value;
+                
+                document.querySelector('.artisan-info h1').textContent = name;
+                document.querySelector('.artisan-specialty').textContent = `Specialty: ${specialty}`;
+                artisanBio.textContent = bio;
+                
+                // Update social media data
+                socialMediaData = {
+                    facebook: document.getElementById('facebook').value,
+                    instagram: document.getElementById('instagram').value,
+                    twitter: document.getElementById('twitter').value,
+                    youtube: document.getElementById('youtube').value
+                };
+                
+                updateSocialLinks();
+                
+                editProfileModal.style.display = 'none';
+            }
+
+            // Submit upload product form
+            uploadProductForm.onsubmit = (e) => {
+                e.preventDefault();
+                const productName = document.getElementById('productName').value;
+                const productPrice = document.getElementById('productPrice').value;
+                const productDescription = document.getElementById('productDescription').value;
+                const productImage = document.getElementById('productImage').files[0];
+
+                // Create a new product card
+                const newProductCard = document.createElement('div');
+                newProductCard.className = 'product-card';
+                newProductCard.innerHTML = `
+                    <img src="${URL.createObjectURL(productImage)}" alt="${productName}">
+                    <div class="product-card-info">
+                        <h3 class="product-card-title">${productName}</h3>
+                        <p class="product-card-price">$${parseFloat(productPrice).toFixed(2)}</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-secondary">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+
+                // Add the new product card to the grid
+                productGrid.appendChild(newProductCard);
+
+                // Reset form and close modal
+                uploadProductForm.reset();
+                uploadProductModal.style.display = 'none';
+
+                // Add event listeners to new buttons
+                const newBuyButton = newProductCard.querySelector('.btn-primary');
+                const newAddToCartButton = newProductCard.querySelector('.btn-secondary');
+
+                newBuyButton.addEventListener('click', () => {
+                    alert(`Proceeding to checkout for ${productName}`);
+                });
+
+                newAddToCartButton.addEventListener('click', () => {
+                    alert(`${productName} added to cart!`);
+                });
+            }
+
+            // Close modals when clicking outside
+            window.onclick = (event) => {
+                if (event.target == editProfileModal) {
+                    editProfileModal.style.display = 'none';
+                }
+                if (event.target == uploadProductModal) {
+                    uploadProductModal.style.display = 'none';
+                }
+            }
+
+            // Existing product buttons functionality
+            const buyButtons = document.querySelectorAll('.btn-primary');
+            const addToCartButtons = document.querySelectorAll('.btn-secondary');
+
+            buyButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productName = e.target.closest('.product-card-info').querySelector('.product-card-title').textContent;
+                    alert(`Proceeding to checkout for ${productName}`);
+                });
+            });
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productName = e.target.closest('.product-card-info').querySelector('.product-card-title').textContent;
+                    alert(`${productName} added to cart!`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
